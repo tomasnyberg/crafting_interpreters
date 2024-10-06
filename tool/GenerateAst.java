@@ -48,14 +48,17 @@ public class GenerateAst {
 
     private static void defineVisitor(
             PrintWriter writer, String baseName, List<String> types) {
+        writer.println();
         writer.println("    interface Visitor<R> {");
 
         for (String type : types) {
             String typeName = type.split(":")[0].trim();
             writer.println("        R visit" + typeName + baseName + "(" +
                     typeName + " " + baseName.toLowerCase() + ");");
+            writer.println();
         }
         writer.println("    }");
+        writer.println();
     }
 
     private static void defineType(PrintWriter writer, String baseName,
