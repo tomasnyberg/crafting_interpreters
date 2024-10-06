@@ -43,7 +43,7 @@ class Scanner {
         return current >= source.length();
     }
 
-    List<Token> scantokens() {
+    List<Token> scanTokens() {
         while (!isAtEnd()) {
             start = current;
             scanToken();
