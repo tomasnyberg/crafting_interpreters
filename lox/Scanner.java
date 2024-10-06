@@ -136,6 +136,22 @@ class Scanner {
         addToken(NUMBER, Double.parseDouble(source.substring(start, current)));
     }
 
+    private void blockComment() {
+        while (!(peek() == '*' && peekNext() == '/') && !isAtEnd()) {
+            if (peek() == '\n')
+                line++;
+            advance();
+        }
+        if (isAtEnd()) {
+            Lox.error(line, "Unterminated block comment.");
+            return;
+        }
+        assert peek() == '*';
+        advance();
+        assert peek() == '/';
+        advance();
+    }
+
     private void scanToken() {
         char c = advance();
         switch (c) {
@@ -185,6 +201,8 @@ class Scanner {
                 if (match('/')) {
                     while (peek() != '\n' && !isAtEnd())
                         advance();
+                } else if (match('*')) {
+                    blockComment();
                 } else {
                     addToken(SLASH);
                 }
