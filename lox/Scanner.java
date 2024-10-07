@@ -137,7 +137,12 @@ class Scanner {
     }
 
     private void blockComment() {
-        while (!(peek() == '*' && peekNext() == '/') && !isAtEnd()) {
+        int nest = 1;
+        while (nest > 0 && !isAtEnd()) {
+            if (peek() == '/' && peekNext() == '*')
+                nest++;
+            if (peek() == '*' && peekNext() == '/')
+                nest--;
             if (peek() == '\n')
                 line++;
             advance();
