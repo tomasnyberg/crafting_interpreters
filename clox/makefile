@@ -2,7 +2,7 @@ EXEC = clox_exec
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c99 -g
 
-SRCS = main.c chunk.c memory.c debug.c value.c vm.c
+SRCS = main.c chunk.c memory.c debug.c value.c vm.c scanner.c compiler.c
 OBJS = $(SRCS:.c=.o)
 
 run: $(SRCS)
