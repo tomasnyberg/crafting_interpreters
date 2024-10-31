@@ -28,7 +28,7 @@ void push(Value value) {
 
 Value pop() {
   vm.stackTop--;
-  return *vm.stackTop--;
+  return *vm.stackTop;
 }
 
 
@@ -51,6 +51,10 @@ static InterpretResult run() {
       case OP_CONSTANT: {
         Value constant = READ_CONSTANT();
         push(constant);
+        break;
+      }
+      case OP_NEGATE: {
+        push(-pop());
         break;
       }
       case OP_RETURN: {
