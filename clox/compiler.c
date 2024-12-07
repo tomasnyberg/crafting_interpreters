@@ -5,6 +5,10 @@
 #include "chunk.h"
 #include "common.h"
 #include "compiler.h"
+#ifdef DEBUG_PRINT_CODE
+#include "debug.h"
+#endif
+
 #include "scanner.h"
 
 typedef struct {
@@ -110,7 +114,14 @@ static void emitConstant(Value value) {
   emitBytes(OP_CONSTANT, makeConstant(value));
 }
 
-static void endCompiler() { emitReturn(); }
+static void endCompiler() {
+  emitReturn();
+#ifdef DEBUG_PRINT_CODE
+  if (!parser.hadError) {
+    disassembleChunk(currentChunk(), "code");
+  }
+#endif
+}
 
 static void expression();
 static ParseRule *getRule(TokenType type);
@@ -210,7 +221,21 @@ ParseRule rules[] = {
     [TOKEN_EOF] = {NULL, NULL, PREC_NONE},
 };
 
-static void parsePrecedence(Precedence precedence) {}
+static void parsePrecedence(Precedence precedence) {
+  advance();
+  ParseFn prefixRule = getRule(parser.previous.type)->prefix;
+  if (prefixRule == NULL) {
+    error("Expect expression");
+    return;
+  }
+  prefixRule();
+
+  while (precedence <= getRule(parser.current.type)->precedence) {
+    advance();
+    ParseFn infixRule = getRule(parser.previous.type)->infix;
+    infixRule();
+  }
+}
 
 static ParseRule *getRule(TokenType type) { return &rules[type]; }
 
