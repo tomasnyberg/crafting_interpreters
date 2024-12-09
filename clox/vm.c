@@ -29,7 +29,10 @@ static void runtimeError(const char *format, ...) {
   resetStack();
 }
 
-void initVM() { resetStack(); }
+void initVM() {
+  resetStack();
+  vm.objects = NULL;
+}
 
 void freeVM() {}
 
