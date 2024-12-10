@@ -5,8 +5,9 @@
 #include "value.h"
 
 typedef enum {
-  OP_RETURN,
   OP_NEGATE,
+  OP_PRINT,
+  OP_RETURN,
   OP_CONSTANT,
   OP_NIL,
   OP_TRUE,
