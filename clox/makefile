@@ -8,3 +8,7 @@ OBJS = $(SRCS:.c=.o)
 run: $(SRCS)
 	$(CC) $(CFLAGS) -o $(EXEC) $(SRCS)
 	./$(EXEC)
+
+runfile: $(SRCS)
+	$(CC) $(CFLAGS) -o $(EXEC) $(SRCS)
+	./$(EXEC) example.lox
