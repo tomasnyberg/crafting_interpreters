@@ -1,7 +1,10 @@
-fun a() { b(); }
-fun b() { c(); }
-fun c() {
-  c("too", "many");
+fun pr() {
+  print "Hej hopp";
+  return 5;
 }
 
-a();
+var x = 0;
+for (var i = 0; i < 10; i = i + 1) {
+  x = x + pr();
+}
+print x;
