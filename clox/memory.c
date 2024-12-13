@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "memory.h"
@@ -23,6 +24,10 @@ static void freeObject(Obj *object) {
     ObjFunction *function = (ObjFunction *)object;
     freeChunk(&function->chunk);
     FREE(ObjFunction, object);
+    break;
+  }
+  case OBJ_NATIVE: {
+    printf("<native fn>");
     break;
   }
   case OBJ_STRING: {

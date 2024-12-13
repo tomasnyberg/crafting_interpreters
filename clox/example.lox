@@ -1,10 +1,12 @@
-fun pr() {
-  print "Hej hopp";
-  return 5;
+fun fib(n) {
+  if (n < 2) return n;
+  return fib(n-2) + fib(n-1);
 }
 
-var x = 0;
-for (var i = 0; i < 10; i = i + 1) {
-  x = x + pr();
+var start = clock();
+for (var i = 2; i < 10; i = i+1){
+  print fib(i);
 }
-print x;
+print fib(15);
+print clock() - start;
+
