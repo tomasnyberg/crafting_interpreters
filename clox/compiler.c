@@ -6,6 +6,7 @@
 #include "chunk.h"
 #include "common.h"
 #include "compiler.h"
+#include "memory.h"
 #include "object.h"
 #include "value.h"
 #ifdef DEBUG_PRINT_CODE
@@ -813,4 +814,12 @@ ObjFunction *compile(const char *source) {
   }
   ObjFunction *function = endCompiler();
   return parser.hadError ? NULL : function;
+}
+
+void markCompilerRoots() {
+  Compiler *compiler = current;
+  while (compiler != NULL) {
+    markObject((Obj *)compiler->function);
+    compiler = compiler->enclosing;
+  }
 }
