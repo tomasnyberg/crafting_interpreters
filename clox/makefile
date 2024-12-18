@@ -12,3 +12,7 @@ run: $(SRCS)
 runfile: $(SRCS)
 	$(CC) $(CFLAGS) -o $(EXEC) $(SRCS)
 	./$(EXEC) example.lox
+
+runfib: $(SRCS)
+	$(CC) $(CFLAGS) -o $(EXEC) $(SRCS)
+	./$(EXEC) fib.lox
