@@ -158,7 +158,9 @@ static void emitReturn() {
 }
 
 static uint8_t makeConstant(Value value) {
+  push(value);
   int constant = addConstant(currentChunk(), value);
+  pop();
   if (constant > UINT8_MAX) {
     error("Too many constants in one chunk.");
     return 0;
