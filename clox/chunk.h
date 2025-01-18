@@ -34,6 +34,7 @@ typedef enum {
   OP_MULTIPLY,
   OP_DIVIDE,
   OP_NOT,
+  OP_CLASS
 } OpCode;
 
 typedef struct {
