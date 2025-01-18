@@ -1,16 +1,5 @@
-var globalSet;
-var globalGet;
-
-fun main() {
-  var a = "initial";
-
-  fun set() { a = "updated"; }
-  fun get() { print a; }
-
-  globalSet = set;
-  globalGet = get;
+fun func() {
+  var x = 5;
+  return x;
 }
-
-main();
-globalSet();
-globalGet();
+print func();
