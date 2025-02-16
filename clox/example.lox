@@ -1,5 +1,8 @@
-fun func() {
-  var x = 5;
-  return x;
+class Scone {
+  topping(first, second) {
+    print "scone with " + first + " and " + second;
+  }
 }
-print func();
+
+var scone = Scone();
+scone.topping("berries", "cream");
